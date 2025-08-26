@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Excelsoft - Soluciones de Software</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --color-primario: #005f99;
+      --color-secundario: #f4f4f4;
+      --color-texto: #333;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', sans-serif;
+      color: var(--color-texto);
+      line-height: 1.6;
+      scroll-behavior: smooth;
+    }
+    header {
+      background: var(--color-primario);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    nav a {
+      color: white;
+      margin-left: 1rem;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    .hero {
+      background: url('tu-imagen-hero.jpg') center/cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 6rem 2rem;
+      animation: fadeIn 1.5s ease-in-out;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+    }
+    .btn {
+      background: var(--color-primario);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+    .btn:hover {
+      background: #00446d;
+    }
+    section {
+      padding: 3rem 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
+    }
+    section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .servicios {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+    .card {
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    form {
+      max-width: 500px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    input, textarea {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-family: inherit;
+    }
+    footer {
+      background: var(--color-primario);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      margin-top: 2rem;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h2>Excelsoft</h2>
+  <nav>
+    <a href="#servicios">Servicios</a>
+    <a href="#nosotros">Nosotros</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <h1>Soluciones de Software a tu medida</h1>
+  <p>Desarrollamos sistemas robustos, escalables y fáciles de usar para tu negocio.</p>
+  <a href="#contacto" class="btn">Solicitar demo</a>
+</section>
+
+<section id="servicios">
+  <h2>Nuestros Servicios</h2>
+  <div class="servicios">
+    <div class="card">
+      <h3>Desarrollo a medida</h3>
+      <p>Aplicaciones personalizadas que se adaptan a tus procesos.</p>
+    </div>
+    <div class="card">
+      <h3>Integraciones</h3>
+      <p>Conectamos tus sistemas para que trabajen como uno solo.</p>
+    </div>
+    <div class="card">
+      <h3>Soporte y mantenimiento</h3>
+      <p>Te acompañamos para que tu software siempre funcione al 100%.</p>
+    </div>
+  </div>
+</section>
+
+<section id="nosotros" style="background: var(--color-secundario);">
+  <h2>Sobre Nosotros</h2>
+  <p>En Excelsoft contamos con más de 20 años de experiencia desarrollando soluciones tecnológicas para empresas de todos los tamaños.</p>
+</section>
+
+<section id="contacto">
+  <h2>Contacto</h2>
+  <form action="https://formspree.io/f/tu-endpoint" method="POST">
+    <input type="text" name="nombre" placeholder="Tu nombre" required>
+    <input type="email" name="email" placeholder="Tu email" required>
+    <textarea name="mensaje" rows="5" placeholder="Tu mensaje" required></textarea>
+    <button type="submit" class="btn">Enviar mensaje</button>
+  </form>
+</section>
+
+<footer>
+  <p>&copy; 2025 Excelsoft - Todos los derechos reservados</p>
+</footer>
+
+<script>
+  // Animación al hacer scroll
+  const secciones = document.querySelectorAll('section');
+  const mostrarSeccion = () => {
+    const triggerBottom = window.innerHeight * 0.85;
+    secciones.forEach(sec => {
+      const top = sec.getBoundingClientRect().top;
+      if (top < triggerBottom) {
+        sec.classList.add('visible');
+      }
+    });
+  };
+  window.addEventListener('scroll', mostrarSeccion);
+  mostrarSeccion();
+</script>
+
+</body>
+</html>

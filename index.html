@@ -7,9 +7,10 @@
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
     :root {
-      --color-primario: #005f99;
-      --color-secundario: #f4f4f4;
-      --color-texto: #333;
+      --color-primario: #2E7D32;   /* Verde principal */
+      --color-secundario: #F5F5F5; /* Gris claro */
+      --color-texto: #333333;      /* Gris oscuro para texto */
+      --color-acento: #66BB6A;     /* Verde claro para efectos */
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -38,12 +39,27 @@
     nav a:hover {
       text-decoration: underline;
     }
+    .menu-toggle {
+      display: none;
+      font-size: 1.8rem;
+      cursor: pointer;
+    }
     .hero {
-      background: url('tu-imagen-hero.jpg') center/cover no-repeat;
+      position: relative;
+      background: url('hero-bg.jpg') center/cover no-repeat;
       color: white;
       text-align: center;
       padding: 6rem 2rem;
       animation: fadeIn 1.5s ease-in-out;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(46, 125, 50, 0.4); /* overlay verde translúcido */
+    }
+    .hero h1, .hero p, .hero .btn {
+      position: relative;
     }
     .hero h1 {
       font-size: 2.5rem;
@@ -65,7 +81,7 @@
       transition: background 0.3s;
     }
     .btn:hover {
-      background: #00446d;
+      background: var(--color-acento);
     }
     section {
       padding: 3rem 2rem;
@@ -117,17 +133,47 @@
       from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
     }
+    /* Responsividad */
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        background: var(--color-primario);
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 200px;
+        padding: 1rem;
+      }
+      nav a {
+        margin: 0.5rem 0;
+      }
+      nav.show {
+        display: flex;
+      }
+      .menu-toggle {
+        display: block;
+        color: white;
+      }
+      .hero h1 { font-size: 1.8rem; }
+      .hero p { font-size: 1rem; }
+    }
+    @media (max-width: 480px) {
+      .hero { padding: 4rem 1rem; }
+      .btn { padding: 0.6rem 1rem; font-size: 0.9rem; }
+    }
   </style>
 </head>
 <body>
 
 <header>
   <h2>Excelsoft</h2>
-  <nav>
+  <nav id="menu">
     <a href="#servicios">Servicios</a>
     <a href="#nosotros">Nosotros</a>
     <a href="#contacto">Contacto</a>
   </nav>
+  <div class="menu-toggle" id="menu-toggle">☰</div>
 </header>
 
 <section class="hero">
@@ -187,6 +233,24 @@
   };
   window.addEventListener('scroll', mostrarSeccion);
   mostrarSeccion();
+
+  // Menú hamburguesa
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('menu');
+  const links = menu.querySelectorAll('a');
+
+  toggle.addEventListener('click', () => {
+    menu.classList.toggle('show');
+  });
+
+  // Cerrar menú al hacer clic en un enlace (solo en móvil)
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      if (window.innerWidth <= 768) {
+        menu.classList.remove('show');
+      }
+    });
+  });
 </script>
 
 </body>
